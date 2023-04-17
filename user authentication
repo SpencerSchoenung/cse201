@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class UserAuthorization {
+    
+    public static boolean authorize(String username, String password) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+
+        while (reader.readLine() != null) {
+  
+            String User = reader.readLine();
+            String Pass = reader.readLine();
+            reader.close();
+            
+            if (username.equals(User) && password.equals(Pass)) {
+                return true;
+                
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        String username = "";
+        String password = "";
+
+ 
+        try {
+            if (authorize(username, password)) {
+                System.out.println("Authentication successful");
+            } else {
+                System.out.println("Authentication failed");
+            }
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
+    }
+}
